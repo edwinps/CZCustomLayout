@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qxl-11-fsz">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ooF-fF-hlt">
+            <objects>
+                <navigationController id="qxl-11-fsz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wG4-hu-bjT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2o1-gv-Baz" kind="relationship" relationship="rootViewController" id="WrM-aX-YLL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gmv-GR-0ch" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-766" y="-31"/>
+        </scene>
+        <!--CustomLayout-->
+        <scene sceneID="FUN-cP-i5M">
+            <objects>
+                <viewController id="2o1-gv-Baz" customClass="ViewController" customModule="CZCustomLayout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Eu6-dk-j8Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="mtg-T5-DDn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zpn-gi-n8y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1KG-CP-A0N">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fJt-yZ-rci">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="2o1-gv-Baz" id="Z6i-a4-ZZg"/>
+                                    <outlet property="delegate" destination="2o1-gv-Baz" id="4R9-tM-lzi"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1KG-CP-A0N" secondAttribute="trailing" id="52i-O2-7jm"/>
+                            <constraint firstItem="mtg-T5-DDn" firstAttribute="top" secondItem="1KG-CP-A0N" secondAttribute="bottom" id="Lem-LY-TFk"/>
+                            <constraint firstItem="1KG-CP-A0N" firstAttribute="leading" secondItem="zpn-gi-n8y" secondAttribute="leading" id="bXv-0M-byu"/>
+                            <constraint firstItem="1KG-CP-A0N" firstAttribute="top" secondItem="Eu6-dk-j8Q" secondAttribute="bottom" id="nqx-3Z-l4W"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="CustomLayout" id="Jbq-bi-5vy"/>
+                    <connections>
+                        <outlet property="collectionView" destination="1KG-CP-A0N" id="EnL-YA-FJe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vOh-so-qSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="148" y="-31"/>
+        </scene>
+    </scenes>
+</document>
