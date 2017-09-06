@@ -2,7 +2,7 @@ CZCustomLayout
 =============
 [![Version](https://cocoapod-badges.herokuapp.com/v/CZCustomLayout/badge.png)](http://cocoadocs.org/docsets/CZSecurityTouchID_swift)
 [![Platform](https://cocoapod-badges.herokuapp.com/p/CZCustomLayout/badge.png)](http://cocoadocs.org/docsets/CZSecurityTouchID_swift)
-[![Build Status](https://travis-ci.org/chiahsien/CZCustomLayout.svg?branch=develop)](https://travis-ci.org/chiahsien/CHTCollectionViewWaterfallLayout)
+[![Build Status](https://travis-ci.org/edwinps/CZCustomLayout.svg?branch=develop)](https://travis-ci.org/edwinps/CZCustomLayout)
 
 **CZCustomLayout** is a subclass of [UICollectionViewFlowLayout].
 
