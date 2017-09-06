@@ -35,6 +35,9 @@ How to Use
 ----------
 
 #### Step 1
+```swift
+import CZCustomLayout
+```
 In order to conform to the BaseCollectionViewLayoutProtocol protocol you have to adopt it in your UIViewController.
 
 #### Step 2

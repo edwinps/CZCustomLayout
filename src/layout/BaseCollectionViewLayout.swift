@@ -20,7 +20,7 @@ import UIKit
 open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
     
     public weak var delegate: BaseCollectionViewLayoutProtocol?
-    var numberOfColumns: Int = 2 {
+    public var numberOfColumns: Int = 2 {
         didSet {
             invalidateLayout()
         }}
@@ -37,7 +37,7 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
         return collectionView!.bounds.width - (sectionInset.left + sectionInset.right)
     }
     
-    override init() {
+    override public init() {
         headersAttributes = [:]
         footersAttributes = [:]
         super.init()
@@ -64,12 +64,12 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
             }
             var column = 0
             let itemCount = collectionView!.numberOfItems(inSection: 0)
-
+            
             for idx in 0 ..< itemCount {
                 let indexPath = IndexPath(row: idx, section: 0)
                 //calculate the heigh necessary
                 let (cellBigger, width, cellHeight) = self.calculateVariableAttributes(indexPath: indexPath, columnWidth)
-               
+                
                 // change the colum if the cell is bigger
                 var yPosition = CGFloat(0)
                 if(cellBigger){
@@ -77,7 +77,7 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
                     yPosition = yOffset.max()!
                 }
                 else{
-                   yPosition = yOffset[column]
+                    yPosition = yOffset[column]
                 }
                 // add the margin depending of the column position
                 let xPosition: CGFloat = xOffset[column] + sectionInset.left
@@ -148,18 +148,20 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
                 self.cleanCache()
             }
         }
-
+        
     }
     
     override open func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
-        let context: UICollectionViewFlowLayoutInvalidationContext = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
-        // invalidate layout if the bounds change
-        context.invalidateFlowLayoutDelegateMetrics = self.boundsChange(with: newBounds)
-        return context;
+        let ctx = super.invalidationContext(forBoundsChange: newBounds)
+        if let context = ctx as? UICollectionViewFlowLayoutInvalidationContext {
+            context.invalidateFlowLayoutDelegateMetrics = self.boundsChange(with: newBounds)
+            return context
+        }
+        return ctx
     }
     
     override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return cache[indexPath.row + 1]
+        return cache[indexPath.row + headersAttributes.count]
     }
     
     override open func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes {
@@ -205,13 +207,13 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
             self.contentHeight = max(self.contentHeight, frame.maxY)
         }else{
             //if there are not footer add the sectionInset.bottom to the contentHeight
-             contentHeight = contentHeight + sectionInset.bottom
+            contentHeight = contentHeight + sectionInset.bottom
         }
     }
     
     private func boundsChange(with newBounds: CGRect) -> Bool{
         let oldBounds = collectionView!.bounds
-        if !oldBounds.equalTo(newBounds) {
+        if newBounds.width != oldBounds.width {
             return true
         }
         return false
@@ -231,7 +233,7 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
         }
         return shorterColumn
     }
-
+    
     private func calculateVariableAttributes(indexPath: IndexPath, _ columnWidth: CGFloat = 0.0) -> (Bool, CGFloat, CGFloat) {
         //calculate the heigh necessary
         if let delegate = delegate {
