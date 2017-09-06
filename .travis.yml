@@ -1,5 +1,3 @@
 language: Swift
-before_install:
-- cd CZCustomLayout/
 script:
 - xctool -project CZCustomLayout.xcodeproj -scheme CZCustomLayout -sdk iphonesimulator
