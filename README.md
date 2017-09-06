@@ -1,12 +1,14 @@
 CZCustomLayout
 =============
+[![Version](https://cocoapod-badges.herokuapp.com/v/CZCustomLayout/badge.png)](http://cocoadocs.org/docsets/CZSecurityTouchID_swift)
+[![Platform](https://cocoapod-badges.herokuapp.com/p/CZCustomLayout/badge.png)](http://cocoadocs.org/docsets/CZSecurityTouchID_swift)
+[![Build Status](https://travis-ci.org/chiahsien/CZCustomLayout.svg?branch=develop)](https://travis-ci.org/chiahsien/CHTCollectionViewWaterfallLayout)
 
 **CZCustomLayout** is a subclass of [UICollectionViewFlowLayout].
 
 This layout is inspired by [Pinterest], using [CHTCollectionViewWaterfallLayout]
 
-![2 columns]![](doc/screen.png)
-
+![](doc/screen.png)
 
 Features
 --------
@@ -77,3 +79,10 @@ Limitation
 
 ## License
 CZCustomLayout is licensed under the MIT licence. See the [LICENSE](https://github.com/edwinps/CZCustomLayout/blob/master/LICENSE.md) for more details.
+
+[UICollectionViewLayout]: http://developer.apple.com/library/ios/#documentation/uikit/reference/UICollectionViewLayout_class/Reference/Reference.html
+[UICollectionViewFlowLayout]: https://developer.apple.com/library/ios/documentation/uikit/reference/UICollectionViewFlowLayout_class/Reference/Reference.html
+[CHTCollectionViewWaterfallLayout]: https://github.com/chiahsien/CHTCollectionViewWaterfallLayout
+[Pinterest]: http://pinterest.com/
+[CocoaPods]: http://cocoapods.org/
+[Carthage]: https://github.com/Carthage/Carthage
