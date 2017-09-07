@@ -1,3 +1,5 @@
 language: Swift
-script:
-- xctool -project CZCustomLayout.xcodeproj -scheme CZCustomLayout -sdk iphonesimulator
+osx_image: xcode8.3
+xcode_project: CZCustomLayout.xcodeproj
+xcode_scheme: CZCustomLayout
+xcode_sdk: iphonesimulator9.0
