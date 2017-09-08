@@ -55,7 +55,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // The minimum spacing to use between columns
         layout.minimumLineSpacing = 10
         
-        layout.numberOfColumns = numberOfColumns
         // Add the waterfall layout to your collection view
         self.collectionView.collectionViewLayout = layout
         //add delegate
@@ -117,21 +116,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView (_ collectionView: UICollectionView, availableWidth: CGFloat, heightForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
         
-        let item = dataSource.itemViewModel[indexPath.row]
-        return calculateCellHeight(item: item, indexPath,availableWidth)
+        if let item = dataSource.ds[indexPath.section]?[indexPath.row]{
+            return calculateCellHeight(item: item, indexPath,availableWidth)
+        }
+        return 0
     }
     
     func collectionView (_ collectionView: UICollectionView, availableWidth: CGFloat, heightForHeaderInSection section: Int) -> CGFloat {
-       return CGFloat(50)
+        return section == 0 ? 50 : 0
     }
     
     func collectionView (_ collectionView: UICollectionView, availableWidth: CGFloat, heightForFooterInSection section: Int) -> CGFloat {
-       return CGFloat(50)
+        return section == 0 ? 50 : 0
     }
     
-    func collectionViewCellBigger(_ indexPath: IndexPath) -> Bool{
+    func collectionView (_ collectionView: UICollectionView, columnCountForSection section: Int) -> Int {
+        return section == 0 ? 2 : 3
+    }
+    
+    func collectionViewBiggerCell(_ indexPath: IndexPath) -> Bool {
         //make the first item bigger
-        if(indexPath.row == 0){
+        if(indexPath.row == 0 && indexPath.section == 0){
             return true
         }
         return false
@@ -141,11 +146,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //** Number of Cells in the CollectionView */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.itemViewModel.count
+        if let numberOfRow = dataSource.ds[section]?.count {
+            return numberOfRow
+        }
+        return 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-       return 2
+       return dataSource.ds.count
     }
     
     // Create a CollectionView Cell */
@@ -154,20 +162,30 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Create the cell and return the cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath) as! ItemCollectionViewCell
         // confic cell
-        cell.configureView(viewModel: dataSource.itemViewModel[indexPath.row])
-        return cell
+        if let model = dataSource.ds[indexPath.section]?[indexPath.row] {
+            cell.configureView(viewModel: model)
+            return cell
+        }
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
+        /// review when there are not header of footer for section
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderCollectionViewCell
-            headerView.configureView(viewModel: dataSource.headerViewModel!)
-            return headerView
+            if indexPath.section < dataSource.headerViewModel.count {
+                headerView.configureView(viewModel: dataSource.headerViewModel[indexPath.section])
+                return headerView
+            }
+            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header", for: indexPath as IndexPath)
         case UICollectionElementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath) as! FooterCollectionViewCell
-            footerView.configureView(viewModel: dataSource.footerViewModel!)
-            return footerView
+            if indexPath.section < dataSource.headerViewModel.count {
+                footerView.configureView(viewModel: dataSource.footerViewModel[indexPath.section])
+                return footerView
+            }
+            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer", for: indexPath as IndexPath)
         default:
             assert(false, "Unexpected element kind")
         }
