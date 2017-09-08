@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'CZCustomLayout'
-    s.version      = '1.0.0'
+    s.version      = '1.1.0'
     s.summary      = 'Library with a custom layout for UICollectionView like pinterest style with a big item at first'
     s.author =
     {
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     }
     s.platform = :ios
     s.source  = {
-        :git => "https://github.com/edwinps/CZCustomLayout.git", :tag => "1.0.0"
+        :git => "https://github.com/edwinps/CZCustomLayout.git", :tag => "1.1.0"
     }
     
     s.source_files  = "src/**/*.{swift}"
