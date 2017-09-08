@@ -6,7 +6,7 @@ CZCustomLayout
 
 **CZCustomLayout** is a subclass of [UICollectionViewFlowLayout].
 
-This layout is inspired by [Pinterest], using [CHTCollectionViewWaterfallLayout]
+This layout is inspired by [Pinterest], using [CHTCollectionViewWaterfallLayout] which allows you to use automatic sizes
 
 ![](doc/screen.png)
 
@@ -15,7 +15,7 @@ Features
 * Easy to use.
 * Customizable.
 * Support header and footer views.
-* Custom column number for one sections.
+* Custom column number for each sections.
 
 Prerequisite
 ------------
@@ -77,7 +77,6 @@ Limitation
 ----------
 * Only vertical scrolling is supported.
 * No decoration view.
-* Only one section
 
 
 ## License
