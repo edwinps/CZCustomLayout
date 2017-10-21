@@ -107,7 +107,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         //use systemLayoutSizeFitting to calculate the height base in the width
         let targetSize = CGSize(width: availableWidth, height: 0)
-        let autoLayoutSize = currentCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
+        let autoLayoutSize = currentCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.defaultLow)
         
         return autoLayoutSize.height
     }
