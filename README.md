@@ -48,7 +48,8 @@ func collectionView (_ collectionView: UICollectionView, availableWidth: CGFloat
 --option--
 func collectionView (_ collectionView: UICollectionView, availableWidth: CGFloat, heightForHeaderInSection section: Int) -> CGFloat
 func collectionView (_ collectionView: UICollectionView, availableWidth: CGFloat, heightForFooterInSection section: Int) -> CGFloat
-func collectionViewCellBigger(_ indexPath: IndexPath) -> Bool
+func collectionView (_ collectionView: UICollectionView, columnCountForSection section: Int) -> Int
+func collectionViewBiggerCell(_ indexPath: IndexPath) -> Bool
 
 ```
 
@@ -64,7 +65,7 @@ layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
 layout.minimumInteritemSpacing = 10
 // The minimum spacing to use between columns
 layout.minimumLineSpacing = 10
-// number of columns
+// number of columns or implement collectionView (_ collectionView: UICollectionView, columnCountForSection section: Int) 
 layout.numberOfColumns = 2
 // Add the layout to your collection view
 self.collectionView.collectionViewLayout = layout
