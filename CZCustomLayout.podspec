@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
     s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
     s.homepage     = "https://github.com/edwinps/CZCustomLayout"
     s.license = { :type => 'MIT', :file => 'LICENSE.md' }
+    s.swift_version = '4.2'
 end
