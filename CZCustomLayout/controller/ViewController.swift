@@ -49,7 +49,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let layout = BaseCollectionViewLayout()
         
         //config margin
-        layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
+        layout.sectionInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         // The minimum spacing to use between rows.
         layout.minimumInteritemSpacing = 10
         // The minimum spacing to use between columns
@@ -68,10 +68,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.register(viewNib, forCellWithReuseIdentifier: "cell")
         
         let headerViewNib = UINib(nibName: "HeaderCollectionViewCell", bundle: nil)
-        collectionView.register(headerViewNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView.register(headerViewNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         
         let footerViewNib = UINib(nibName: "FooterCollectionViewCell", bundle: nil)
-        collectionView.register(footerViewNib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
+        collectionView.register(footerViewNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
     }
     
     //MARK: - Accessible Methods
@@ -172,20 +172,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         /// review when there are not header of footer for section
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderCollectionViewCell
             if indexPath.section < dataSource.headerViewModel.count {
                 headerView.configureView(viewModel: dataSource.headerViewModel[indexPath.section])
                 return headerView
             }
-            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header", for: indexPath as IndexPath)
-        case UICollectionElementKindSectionFooter:
+            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath as IndexPath)
+        case UICollectionView.elementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath) as! FooterCollectionViewCell
             if indexPath.section < dataSource.headerViewModel.count {
                 footerView.configureView(viewModel: dataSource.footerViewModel[indexPath.section])
                 return footerView
             }
-            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer", for: indexPath as IndexPath)
+            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer", for: indexPath as IndexPath)
         default:
             assert(false, "Unexpected element kind")
         }
