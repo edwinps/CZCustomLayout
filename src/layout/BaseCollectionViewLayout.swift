@@ -147,7 +147,7 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
                         column = 0
                     }
                     maxYframe = yHeaderPosition
-                    yOffset = yOffset.flatMap { _ in return maxYframe + sectionInset.top + headerHeight }
+                    yOffset = yOffset.compactMap { _ in return maxYframe + sectionInset.top + headerHeight }
                     
                 }
                 /*
@@ -217,7 +217,7 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
                 if let maxY = yOffset.max() {
                     let yFooterPosition = maxY - minimumInteritemSpacing + sectionInset.bottom
                     let footerHeight = self.createFooter(forSetion: section, yPosition: yFooterPosition)
-                    yOffset = yOffset.flatMap { _ in return maxY + footerHeight }
+                    yOffset = yOffset.compactMap { _ in return maxY + footerHeight }
                 }
                 
             }
@@ -287,9 +287,9 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
     
     override open func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes {
         switch elementKind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             return self.headersAttributes[indexPath.section] ?? UICollectionViewLayoutAttributes()
-        case UICollectionElementKindSectionFooter:
+        case UICollectionView.elementKindSectionFooter:
             return self.footersAttributes[indexPath.section] ?? UICollectionViewLayoutAttributes()
         default:
             return UICollectionViewLayoutAttributes()
@@ -325,7 +325,7 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
         }
         if(height > 0){
             let frame = CGRect(x: 0, y: yPosition, width: width, height: height)
-            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: IndexPath(row: 0, section: forSetion))
+            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(row: 0, section: forSetion))
             attributes.frame = frame
             cache.append(attributes)
             headersAttributes[forSetion] = attributes
@@ -347,7 +347,7 @@ open class BaseCollectionViewLayout : UICollectionViewFlowLayout {
         }
         if(height > CGFloat(0)){
             let frame = CGRect(x: 0, y: yPosition, width: width, height: height)
-            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, with: IndexPath(row: 0, section: forSetion))
+            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, with: IndexPath(row: 0, section: forSetion))
             attributes.frame = frame
             cache.append(attributes)
             footersAttributes[forSetion] = attributes
